@@ -32,8 +32,3 @@ button {
     clear: both;
     display: table;
 }
-
-.time-right {
-    float: right;
-    color: #aaa;
-}

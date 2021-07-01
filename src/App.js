@@ -15,8 +15,8 @@ function App({firestore}) {
         firestore.collection('messages').orderBy('createdAt')
     )
 
-    const handleMessage = () => {
-        firestore.collection('messages').add({
+    const handleMessage = async () => {
+        await firestore.collection('messages').add({
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             text: text
         })
@@ -38,16 +38,8 @@ function App({firestore}) {
             <ul style={{display: "inline-block"}}>
                 {
                     messages.map(message =>
-                        <li className={"container"}>
+                        <li className={"container"} key={message.createdAt}>
                             {message.text}
-                            <div className={"time-right"}>
-                                {new Date(message.createdAt.seconds*1000).getMinutes()}:
-                                {new Date(message.createdAt.seconds*1000).getHours()}
-                                <br/>
-                                {new Date(message.createdAt.seconds*1000).getDate()}.
-                                {new Date(message.createdAt.seconds*1000).getMonth()+1}.
-                                {new Date(message.createdAt.seconds*1000).getFullYear()}
-                            </div>
                         </li>)
                 }
             </ul>
