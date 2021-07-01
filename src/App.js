@@ -33,6 +33,7 @@ function App({firestore}) {
                 <input type="text" placeholder={"text message..."} onChange={event => setText(event.target.value)} value={text}/>
                 <button onClick={handleMessage}>Send</button>
             </div>
+            <h2>Messages:</h2>
             <ul>
                 {
                     messages.map(message =>
