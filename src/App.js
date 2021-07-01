@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useCollectionData} from "react-firebase-hooks/firestore"
 import firebase from "firebase";
+import "./App.css"
 
 /**
  * Component for showing chat message and send message
@@ -28,17 +29,25 @@ function App({firestore}) {
 
 
     return (
-        <div style={{textAlign: "center", marginTop: "50px"}}>
+        <div style={{textAlign: "center", marginTop: "50px", }}>
             <div>
-                <input type="text" placeholder={"text message..."} onChange={event => setText(event.target.value)} value={text}/>
+                <input type="text" placeholder={"Text message..."} onChange={event => setText(event.target.value)} value={text}/>
                 <button onClick={handleMessage}>Send</button>
             </div>
             <h2>Messages:</h2>
-            <ul>
+            <ul style={{display: "inline-block"}}>
                 {
                     messages.map(message =>
-                        <li style={{listStyleType: "none", fontSize: "2.5rem", marginTop: "40px"}}>
+                        <li className={"container"}>
                             {message.text}
+                            <div className={"time-right"}>
+                                {new Date(message.createdAt.seconds*1000).getMinutes()}:
+                                {new Date(message.createdAt.seconds*1000).getHours()}
+                                <br/>
+                                {new Date(message.createdAt.seconds*1000).getDate()}.
+                                {new Date(message.createdAt.seconds*1000).getMonth()+1}.
+                                {new Date(message.createdAt.seconds*1000).getFullYear()}
+                            </div>
                         </li>)
                 }
             </ul>
